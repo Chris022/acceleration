@@ -36,7 +36,7 @@ class Acceleration
         $main = $dom->getElementById("main");
         if (is_null($main) || $main->tagName !== "div") throw new BaseViewInvalid();
 
-        $ret = putenv("ACCELERATION_BASE_VIEW=\"$url\"");
+        $ret = putenv("ACCELERATION_BASE_VIEW=$url");
         if ($ret === false) throw new CouldNotSetBaseView();
     }
 
@@ -52,7 +52,7 @@ class Acceleration
      * 
      * @return string|array<string,mixed>
      */
-    public static function render(string $page_name, array $props): string|array
+    public static function get(string $page_name, array $props): string|array
     {
 
         $page_object = [
@@ -62,11 +62,8 @@ class Acceleration
         ];
 
 
-        //check header
-        $acceleration_initialised = $_SERVER['HTTP_X-Acceleration'];
-
         //if acceleration is initialised simply return a page JSON ojbect
-        if ($acceleration_initialised) {
+        if (isset($_SERVER['HTTP_X_ACCELERATION']) and $_SERVER['HTTP_X_ACCELERATION']) {
             return $page_object;
         }
 
@@ -87,5 +84,31 @@ class Acceleration
         $main->setAttribute("x-page",json_encode($page_object));
 
         return $dom->saveHTML();
+    }
+
+    /**
+     * This function calls the get function, but it sets the content-type to either json or html
+     * and simply returns a string
+     * 
+     * @param string $page_name
+     * @param array<string,mixed> $props
+     * 
+     * @throws BaseViewUrlNotSet
+     * @throws BaseViewNotFound
+     * @throws BaseViewInvalid
+     * 
+     * @return string
+     */
+    public static function render(string $page_name, array $props): string
+    {
+        $ret = Acceleration::get($page_name,$props);
+        if(is_array($ret)){
+            header('Content-Type: application/json; charset=utf-8');
+            return json_encode($ret);
+        }
+
+        header('Content-Type: text/html; charset=utf-8');
+        return $ret;
+        
     }
 }
