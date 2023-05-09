@@ -1,0 +1,12 @@
+{
+    "name": "chris022/acceleration-backend",
+    "description": "The PHP Implementation of the acceleration backend",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Acceleration\\": "src/"
+        }
+    },
+    "require": {}
+}
