@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <script src="src/acceleration.js"></script>
+    <script>
+        class HelloWorld extends AccelerationComponent {
+            
+            connectedCallback() {
+                let text = this.props["text"]
+                this.innerHTML = `<h1> ${text} </h1>`;
+            }
+        }
+        customElements.define("hello-world", HelloWorld);
+    </script>
 </head>
+
 <body>
-    <div id="main" x-page='{"component":"button"}'></div>
+    <div id="main" x-page='{"component":"hello-world","props":{"text":"Hallo Chrisi"}}'></div>
 </body>
 
 </html>
