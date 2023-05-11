@@ -17,8 +17,14 @@ function route(){
 
    let component = document.createElement(webcomponent_name);
 
+   //set the props property in the webcomponent
+   let props = page_object["props"];
+   if(!!!props) throw "Acceleration Error: The page_object does not include a 'props' attribute!";
+   component.props = props;
+
+
    main_div.appendChild(component);    
 }
 
 //call the route method once the webpage is loaded
-window.addEventListener("DOMContentLoaded",route());
+window.addEventListener("DOMContentLoaded",route);
