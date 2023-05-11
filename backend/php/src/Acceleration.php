@@ -56,7 +56,7 @@ class Acceleration
     {
 
         $page_object = [
-            "page" => $page_name,
+            "component" => $page_name,
             "props" => $props,
             "url" => $_SERVER['REQUEST_URI']
         ];
