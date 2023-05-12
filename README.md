@@ -22,3 +22,16 @@ Opening the required Page is done by the frontend library.
 
 If the Header isn't true, the function returns a full html page. The page contains a main div. The divs attribute "x-page" holds an instance of a JSON page object.
 
+## The Frontend
+The Frontend consists out of a simple library that provides:
+* routing capabilities
+* form capabilities
+* a way of calling backend routes
+### The route function
+This function can be called whenever the "page" object changes. It then swaps the currently displayed content in the main div with the webcomponent referenced in the "page" object. That way it acts as kind of a router. The function passes the props array as an property down to the webcomponent. Inside the Webcomponents the property object can then be accessed vai the ```this.props``` field. This function also updates the browser history, to include the new webpage.
+### The initAcceleration function
+This function is automatically called when the webpage is first loaded. It checks if there is a "main" div, check if that "main" div has the "x-page" attribute and then calls "route" with the value of the "x-page" attribute.
+### The visit function
+This function can be used to call the backend and visit new webpages. It simply fires an http request with the X-ACCELERATION Header set and calls the route function with the resulting "page" object
+### The get/post/put/patch/delete_ functions
+These functions act as a wrapper around the visit function. 
