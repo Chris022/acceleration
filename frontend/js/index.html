@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <script src="src/acceleration.js"></script>
+    <script src="/frontend/js/src/acceleration.js"></script>
     <script>
         class HelloWorld extends AccelerationComponent {
             
@@ -13,11 +13,25 @@
             }
         }
         customElements.define("hello-world", HelloWorld);
+
+        class OldWorld extends AccelerationComponent {
+            
+            connectedCallback() {
+                let text = this.props["text"]
+                this.innerHTML = `<p> ${text} </p>`;
+            }
+        }
+        customElements.define("old-world", OldWorld);
+
+        function on_click(){
+            post("/backend/php/index.php",[])
+        }
     </script>
 </head>
 
 <body>
-    <div id="main" x-page='{"component":"hello-world","props":{"text":"Hallo Chrisi"}}'></div>
+    <div id="main" x-page='{"component":"old-world","props":{"text":"Hallo Chrisi"}}'></div>
+    <button onclick="on_click()">Press Me</button>
 </body>
 
 </html>
