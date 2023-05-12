@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", initAcceleration);
 
 //everytime the user hits the back button in his browser, the correct webcomponent has to be loaded again
 //this is done by calling the route function with the page object from the page in the history
-window.addEventListener("popstate", (event) => route(event.state))
+window.addEventListener("popstate", (event) => {if(event.state) route(event.state,false,true)})
 
 //---------------------------------------------- END ----------------------------------------------//
 
@@ -25,15 +25,18 @@ function initAcceleration() {
 
     let page_object = JSON.parse(/** @type {string} */(main_div.getAttribute("x-page")));
 
-    route(page_object);
+    route(page_object,true);
 }
 
 /**
- * The function that loads the correct webcomponent based on the response from the backend
+ * The function that loads the correct webcomponent based on the response from the backend.
+ * The back parameter has to be true if the route function is called because the user hit the back button
+ * The inital parameter has to be true if the route function is called on the initial page load
  * 
  * @param {object} page_object
+ * @param {boolean} back 
  */
-function route(page_object) {
+function route(page_object, initial=false, back=false) {
     //create a new html element and insert it into the main div
     //the name of the element is the component 
    let webcomponent_name = page_object["component"];
@@ -58,7 +61,8 @@ function route(page_object) {
     main_div.appendChild(component);
 
     //if everything was successfull add the new page to the history
-    history.pushState(page_object, "", page_object["url"]);
+    if(initial) history.replaceState(page_object, "", page_object["url"]); 
+    else if(!!!back) history.pushState(page_object, "", page_object["url"]); 
 
     //hide the loader (if exists)
     let loader = document.getElementById("loading-element");
@@ -173,5 +177,3 @@ function delete_(url, body){
     visit(url,body,"Delete");
 }
 //------------------------------------------ END ------------------------------------------//
-
-//TODO implement loading animation
