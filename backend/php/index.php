@@ -7,8 +7,8 @@ require "./vendor/autoload.php";
 
 use Acceleration\Acceleration;
 
-Acceleration::setBaseView("http://localhost:8080/baseview.html");
+Acceleration::setBaseView("http://localhost:8080/frontend/js/index.html");
 
-die(Acceleration::render("dashboard",[
-    "users" => [["name"=>"chris","age"=>21]]
+die(Acceleration::render("hello-world",[
+    "text" => "Chris"
 ]));
