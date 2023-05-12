@@ -4,6 +4,7 @@
 
 <head>
     <script src="/frontend/js/src/acceleration.js"></script>
+    <script src="/frontend/js/src/acceleration-loading.js"></script>
     <script>
         class HelloWorld extends AccelerationComponent {
             
@@ -26,11 +27,13 @@
         function on_click(){
             post("/backend/php/index.php",[])
         }
+        
     </script>
 </head>
 
 <body>
     <div id="main" x-page='{"component":"old-world","props":{"text":"Hallo Chrisi"}}'></div>
+    <bar-loader id="loading-element"></bar-loader>
     <button onclick="on_click()">Press Me</button>
 </body>
 

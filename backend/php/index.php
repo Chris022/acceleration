@@ -9,6 +9,8 @@ use Acceleration\Acceleration;
 
 Acceleration::setBaseView("http://localhost:8080/frontend/js/index.html");
 
+sleep(1);
+
 die(Acceleration::render("hello-world",[
     "text" => "Chris"
 ]));

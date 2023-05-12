@@ -58,7 +58,11 @@ function route(page_object) {
     main_div.appendChild(component);
 
     //if everything was successfull add the new page to the history
-    history.pushState(page_object, "", page_object["url"])
+    history.pushState(page_object, "", page_object["url"]);
+
+    //hide the loader (if exists)
+    let loader = document.getElementById("loading-element");
+    if(loader) loader.style.display = "none";
 }
 
 //------------------------------------------ END ------------------------------------------//
@@ -110,6 +114,10 @@ class AccelerationComponent extends HTMLElement{
  * @param {string} method
  */
 function visit(url, body, method) {
+    //show the loader (if exists)
+    let loader = document.getElementById("loading-element");
+    if(loader) loader.style.display = "unset";
+
     let ret = fetch(
         url,
         {
