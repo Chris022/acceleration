@@ -35,3 +35,9 @@ This function is automatically called when the webpage is first loaded. It check
 This function can be used to call the backend and visit new webpages. It simply fires an http request with the X-ACCELERATION Header set and calls the route function with the resulting "page" object
 ### The get/post/put/patch/delete_ functions
 These functions act as a wrapper around the visit function. 
+## Forms
+When using forms with acceleration it requires the "form" function. Even though all the other functions can also be used, this would disable error reporting.
+Server-side form validation with acceleration works the following way:
+You send the form data to the server. The server checks the data. In case of invalid data, you simply redirect back to the form page with an property called "errors". This property is a object whose keys are the names of the form fields and whose values are the Error message.
+
+When using the form library it provides a set of functions that can be used to send formdata to the backend. These functions include callbacs for `onSuccess` and `onError`.
