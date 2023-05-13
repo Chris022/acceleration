@@ -186,7 +186,7 @@ function delete_(url, body){
  * 
  * @returns {void}
  */
-function form(event, url, method, onError) {
+function submit_form(event, url, method, onError) {
     //show the loader (if exists)
     let loader = document.getElementById("loading-element");
     if (loader) loader.style.display = "unset";
