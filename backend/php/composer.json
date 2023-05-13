@@ -1,5 +1,5 @@
 {
-    "name": "chris022/acceleration-backend",
+    "name": "acceleration/backend-php",
     "description": "The PHP Implementation of the acceleration backend",
     "type": "library",
     "license": "MIT",
