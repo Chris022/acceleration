@@ -1,0 +1,26 @@
+{
+    "name": "acceleration/php-js",
+    "description": "A super simpel exampe for using Acceleration with php in the backend and js in the frontend",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Acceleration\\PhpJs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Chris022"
+        }
+    ],
+    "require": {
+        "acceleration/backend-php": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./../../backend/php/"
+        }
+    ]
+    
+}

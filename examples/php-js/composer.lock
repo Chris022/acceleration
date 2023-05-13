@@ -1,0 +1,43 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3b5fa05acd2bad074b64fec887354083",
+    "packages": [
+        {
+            "name": "acceleration/backend-php",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./../../backend/php",
+                "reference": "ffd00be5902c868afdeafbbd5531c3a0d9c6c59b"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Acceleration\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "The PHP Implementation of the acceleration backend",
+            "transport-options": {
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "acceleration/backend-php": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
