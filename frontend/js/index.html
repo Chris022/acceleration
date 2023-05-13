@@ -24,8 +24,17 @@
         }
         customElements.define("old-world", OldWorld);
 
-        function on_click(){
-            post("/backend/php/index.php",[])
+        function displayErrors(errors){
+            console.log("inhere")
+            if(errors.name){
+                document.getElementById("name-error").innerText = errors.name
+                document.getElementById("name-error").hidden = false
+            }
+
+        }
+
+        function submit_form(event){
+            form(event,"/backend/php/index.php","GET",displayErrors)
         }
         
     </script>
@@ -34,7 +43,11 @@
 <body>
     <div id="main" x-page='{"component":"old-world","props":{"text":"Hallo Chrisi"}}'></div>
     <bar-loader id="loading-element"></bar-loader>
-    <button onclick="on_click()">Press Me</button>
+    <form onsubmit="submit_form(event)">
+        <label hidden="true" id="name-error">Error</label>
+        <input name="name" type="text"/>
+        <input type="submit" value="Send"/>
+    </form>
 </body>
 
 </html>
