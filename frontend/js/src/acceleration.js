@@ -43,6 +43,9 @@ function route(page_object, initial=false, back=false) {
 
     if (!!!webcomponent_name) throw "Acceleration Error: The page_object does not include a 'component' attribute!";
 
+    //check if the requestet webcomponent is defined
+    if(customElements.get(webcomponent_name) === undefined) throw `Acceleration Error: The webcomponent ${webcomponent_name} does not exist!`;
+
     /**@type {AccelerationComponent} */
     let component = document.createElement(webcomponent_name);
 
