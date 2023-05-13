@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "acceleration/backend-php": "@dev"
+        "acceleration/backend-php": "@stable"
     },
     "repositories": [
         {
