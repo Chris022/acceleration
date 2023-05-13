@@ -3,7 +3,7 @@
 //---------------------------------- This section listens for events -------------------------------//
 
 //once the website is loaded call the initAcceleration function in order to load the correct webcomponent
-window.addEventListener("DOMContentLoaded", initAcceleration);
+window.addEventListener("load", initAcceleration);
 
 //everytime the user hits the back button in his browser, the correct webcomponent has to be loaded again
 //this is done by calling the route function with the page object from the page in the history
