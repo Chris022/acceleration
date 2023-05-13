@@ -114,7 +114,7 @@ class AccelerationComponent extends HTMLElement{
 /**
  * This function can be used to call the backend with a post call - this also updates the browser history
  * @param {string} url 
- * @param {object} body
+ * @param {object|null} body
  * @param {string} method
  */
 function visit(url, body, method) {
@@ -142,7 +142,7 @@ function visit(url, body, method) {
  * @param {object} body
  */
 function get(url, body){
-    visit(url,body,"GET");
+    visit(url + new URLSearchParams(body), null, "GET");
 }
 /**
  * Helper for a specific http method
@@ -175,5 +175,52 @@ function put(url, body){
  */
 function delete_(url, body){
     visit(url,body,"Delete");
+}
+
+/**
+ * Helper for sending form data to the backend
+ * @param {SubmitEvent} event 
+ * @param {string} url 
+ * @param {string} method 
+ * @param {Function} onError
+ * 
+ * @returns {void}
+ */
+function form(event, url, method, onError) {
+    //show the loader (if exists)
+    let loader = document.getElementById("loading-element");
+    if (loader) loader.style.display = "unset";
+
+    //get the form component
+    let form = /** @type {HTMLFormElement}*/ (event.target);
+    let data = new FormData(form);
+    let data_array = /** @type {Record<string,string>} */ (Object.fromEntries(data.entries()));
+
+    if (method === "GET") url = url + "?" + new URLSearchParams(data_array)
+
+    let ret = fetch(
+        url,
+        {
+            "method": method,
+            "headers": {
+                "X-ACCELERATION": "1"
+            },
+            "body": (method === "GET") ? null : data
+        }
+    )
+
+    ret.then(result => result.json())
+        .then(page => {
+            if (page.props.errors) {
+                onError(page.props.errors)
+                
+                //hide the loader (if exists)
+                let loader = document.getElementById("loading-element");
+                if (loader) loader.style.display = "none";
+            } else {
+                route(page)
+            }
+        })
+    event.preventDefault();
 }
 //------------------------------------------ END ------------------------------------------//
