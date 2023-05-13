@@ -31,7 +31,10 @@ class Acceleration
 
         //check if the html contains a div with the "main" id
         $dom = new DOMDocument();
+        
+        libxml_use_internal_errors(true);
         $dom->loadHTML($html);
+        libxml_clear_errors();
 
         $main = $dom->getElementById("main");
         if (is_null($main) || $main->tagName !== "div") throw new BaseViewInvalid();
